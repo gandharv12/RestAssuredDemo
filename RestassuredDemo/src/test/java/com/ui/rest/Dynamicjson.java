@@ -15,14 +15,14 @@ public class Dynamicjson {
 	public void addBook(String bookname, String isbnn, String aisle1, String authorname)
 	{
 		RestAssured.baseURI= "http://216.10.245.166";
-	String addbookresponse=	given().header("Content-Type","application/json")
+	String addbookresponse1=	given().header("Content-Type","application/json")
 		.body(Payload.AddBook(bookname,isbnn,aisle1,authorname))
 		.when().post("Library/Addbook.php")
 		.then().log().all().assertThat()
 		.statusCode(200)
 		.extract().response().asString();
 	
-	JsonPath js = new JsonPath(addbookresponse);
+	JsonPath js = new JsonPath(addbookresponse1);
 	String id= js.get("ID");
 	System.out.println(id);
 	
